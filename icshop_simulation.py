@@ -284,7 +284,7 @@ def simulation(exp_chef_num, new_chef_num, exp_cashier_num, new_cashier_num, bud
             if not timelog:
                 outfile = open(filename + ".csv","a")
                 # File header: #exp_chef,#new_chef,#exp_cashier,#new_cashier,#total_s_icecream, #total_m_icecream,
-                # #total_l_icecream, #average ice_cream number,
+                # #total_l_icecream, #total ice_cream number by equivalent unit,
                 # #customers, avg_ordering_time, avg_preparing time, avg_waiting_time, profit
                 print("%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s" %
                       (exp_chef_num, new_chef_num, exp_cashier_num, new_cashier_num, icshop.total_s_ic,
@@ -295,7 +295,7 @@ def simulation(exp_chef_num, new_chef_num, exp_cashier_num, new_cashier_num, bud
                 outfile.close()
         else:
             if timelog:
-                print("Budget is not enough. Please adjust employee numbers.")
+                print("Budget is not enough. Please adjust employee numbers or raw material cost.")
 
 
 if __name__ == '__main__':
