@@ -74,9 +74,9 @@ file. There are sample output files in the repo, and our statistical analysis us
 
 5. Cashier: Preparation time based on various levels of experience (normal distribution)
 
-6. Customer arrival interval: uniform distribution based on different range of time in a day.
+6. Customer arrival per second: Whether there is a customer in each second. (Bernoulli distribution)
                               
-      During peak hour, we assume customer comes in every 240 seconds while during the other time, we assume customer comes in every 1200 second.
+      The probability of a customer comes in per second during rush hour is (1/240); the probability of a customer comes in per second during non-rush hour is (1/1200).
 
 
 ## Hypothesis or hypotheses before running the simulation:
