@@ -1,5 +1,6 @@
 import Distribution
 import random
+from scipy.stats import bernoulli
 
 class Customer:
     # cust_order example: {'S':1, 'M':2 'L':1}
@@ -62,7 +63,7 @@ class Customer:
         return order_list
 
 
-def new_customer(currentSecond: int)->bool:
+def new_customer(currentSecond: int, prob1: float, prob2: float)->bool:
     """
     Randomly generate a customer coming to the ice-cream shop during peak hour and non-peak hour
     Assume that more customers come from 3PM - 5PM and 7PM - 8:30PM
@@ -73,14 +74,14 @@ def new_customer(currentSecond: int)->bool:
     """
 
     if (10800 < currentSecond < 18000) or (25200 < currentSecond < 30600):
-        num = random.randrange(1, 240)   # peak-hour: customer/240 sec on average
-        if num == 20:
+        ret = bernoulli.rvs(p=prob1)
+        if ret == 1:
             return True
         else:
             return False
     else:
-        num = random.randrange(1, 1200)  # non-peak hour: customer/1200 sec on average
-        if num == 800:
+        ret = bernoulli.rvs(p=prob2)
+        if ret == 1:
             return True
         else:
             return False

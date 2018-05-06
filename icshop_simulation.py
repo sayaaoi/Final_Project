@@ -198,7 +198,8 @@ def simulation(exp_chef_num, new_chef_num, exp_cashier_num, new_cashier_num, bud
             for currentSecond in range(sys.maxsize):
                 # shop stops taking new order at 9:45pm or running out of raw material
                 if currentSecond < Ice_creamShop.total_sec - 900 and icshop.is_enough_raw_material is True:
-                    if Customer.new_customer(currentSecond):
+                    # peak-hour: customer/240 sec on average; # non-peak hour: customer/1200 sec on average
+                    if Customer.new_customer(currentSecond, 1/240, 1/1200):
                         customer = Customer.Customer(cust_id + 1, currentSecond)
                         cust_id += 1
 
