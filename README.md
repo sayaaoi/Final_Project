@@ -1,5 +1,5 @@
 # Title: Nitrogen Ice-cream Shop Monte Carlo Simulation
-![alt text](https://torontocitykey.com/wp-content/uploads/2017/11/Labsense-1.jpg)
+![Nitro ice-cream pic](https://torontocitykey.com/wp-content/uploads/2017/11/Labsense-1.jpg, "Nitrogen Ice-cream")
 
 ## Team Members:
 Yuejun Wu, Thuong Phan
@@ -84,7 +84,7 @@ file. There are sample output files in the repo, and our statistical analysis us
 
 *Alternative Hypothesis*: At least one of the variables (the number of experienced chef, the number of inexperienced chef, the number of experienced cashier, the number of inexperienced cashier) has association with average waiting time.
 
-![alt text](https://github.com/sayaaoi/Final_Project/blob/master/data/waiting%20line.png)
+![waiting line](https://github.com/sayaaoi/Final_Project/blob/master/data/waiting%20line.png)
 
 ## Analytical Summary of our findings:
 We control the number of budget and raw material cost, and run simulation program to generate sample data. 
@@ -140,6 +140,8 @@ with average waiting time given 95% confidence interval.
 ## All Sources Used:
 - Miller & Ranum: Problem Solving with Algorithms and Data Structures Using Python, Section 3.4, pages 106-119
 - [How to put legend out of the plot](https://stackoverflow.com/questions/4700614/how-to-put-the-legend-out-of-the-plot?)
+- [Bash Color functions](https://gist.github.com/daytonn/8677243)
+- [Markdown Cheatsheet](https://github.com/adam-p/markdown-here/wiki/Markdown-Cheatsheet#blockquotes)
 - https://github.com/nikolausn/Final-project
 
 
