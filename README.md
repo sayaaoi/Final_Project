@@ -1,5 +1,5 @@
 # Title: Nitrogen Ice-cream Shop Monte Carlo Simulation
-![Nitro ice-cream pic](https://torontocitykey.com/wp-content/uploads/2017/11/Labsense-1.jpg, "Nitrogen Ice-cream")
+![Nitro ice-cream pic](https://torontocitykey.com/wp-content/uploads/2017/11/Labsense-1.jpg "Nitrogen Ice-cream")
 
 ## Team Members:
 Yuejun Wu, Thuong Phan
