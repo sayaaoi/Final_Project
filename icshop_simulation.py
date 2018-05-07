@@ -56,6 +56,13 @@ import Employee
 import Operation
 import Customer
 
+# colored console output
+red_col = '\033[91m'
+blue_col = '\033[94m'
+blue_bold = "\033[1;34m"
+red_bold = "\033[1;31m"
+black_bold = "\033[1;30m"
+endc = '\033[0m'
 
 class Ice_creamShop:
     # shop opens from 12PM - 10PM (10 hours) 10hours = 36000 sec
@@ -168,9 +175,9 @@ def has_raw_material(customer: Customer, raw_material_cost: float)->bool:
 
 def simulation(exp_chef_num, new_chef_num, exp_cashier_num, new_cashier_num, budget, raw_material_cost, filename="default", timelog=True):
     if exp_chef_num == new_chef_num == 0:
-        print("Wrong simulation. Shop cannot operate without a chef!")
+        print(red_bold + "Wrong simulation. Shop cannot operate without a chef!" + endc)
     elif exp_cashier_num == new_cashier_num == 0:
-        print("Wrong simulation. Shop cannot operate without a cashier!")
+        print(red_bold + "Wrong simulation. Shop cannot operate without a cashier!" + endc)
     else:
         icshop = Ice_creamShop(exp_chef_num, new_chef_num, exp_cashier_num, new_cashier_num, raw_material_cost)
         cust_id = 0
@@ -183,9 +190,9 @@ def simulation(exp_chef_num, new_chef_num, exp_cashier_num, new_cashier_num, bud
         customer_num_ic = {}  # total number of ice-cream for each customer (to check if prep is finished for a certain customer)
         if icshop.is_within_budget(budget):
             if timelog:
-                print(u"\u2665 \u2665 \u2665 \u2665 \u2665 \u2665 \u2665 \u2665 \u2665 \u2665 \u2665 \u2665 \u2665 \u2665 \u2665 \u2665 \u2665 \u2665 \u2665 \u2665")
+                print(red_col + u"\u2665 \u2665 \u2665 \u2665 \u2665 \u2665 \u2665 \u2665 \u2665 \u2665 \u2665 \u2665 \u2665 \u2665 \u2665 \u2665 \u2665 \u2665 \u2665 \u2665" + endc)
                 print("%s: Nitro Ice-cream Shop opens. " % Operation.seconds_to_hhmmss(0))
-                print(u"\u2665 \u2665 \u2665 \u2665 \u2665 \u2665 \u2665 \u2665 \u2665 \u2665 \u2665 \u2665 \u2665 \u2665 \u2665 \u2665 \u2665 \u2665 \u2665 \u2665\n")
+                print(red_col + u"\u2665 \u2665 \u2665 \u2665 \u2665 \u2665 \u2665 \u2665 \u2665 \u2665 \u2665 \u2665 \u2665 \u2665 \u2665 \u2665 \u2665 \u2665 \u2665 \u2665\n" + endc)
 
             order_lis = []  # a list for different Ordering object (each cashier constructs an Ordering object)
             prepare_lis = []  # a list for different Preparing object (each chef constructs an Preparing object)
@@ -214,7 +221,7 @@ def simulation(exp_chef_num, new_chef_num, exp_cashier_num, new_cashier_num, bud
                             icshop.is_enough_raw_material = False
                             last_customer_id = customer.get_cust_id()-1
                             if timelog:
-                                print("Shop will run out of raw material soon. Only take order till customer ID %s. Stop taking new customers now!" % last_customer_id)
+                                print(red_bold + "Shop will run out of raw material soon. Only take order till customer ID %s. Stop taking new customers now!" % last_customer_id + endc)
                                 print("*  *  *  *  *  *  *  *  *  *  *  *  *  *  *  *  *  *  *  *  *  *  *  *  *")
 
                 # avoid first cashier does most the work
@@ -259,24 +266,24 @@ def simulation(exp_chef_num, new_chef_num, exp_cashier_num, new_cashier_num, bud
                             finish_status = True
                         Operation.Preparing.count_ic_order[preparing.cust_id] = 0
                         if timelog:
-                            print(">>> %s: Ice-cream ready! Customer %s's ice-cream order is completed!" %
-                                 (Operation.seconds_to_hhmmss(preparing.prepare_end_time), preparing.cust_id))
+                            print(blue_bold + ">>> %s: Ice-cream ready! Customer %s's ice-cream order is completed!" %
+                                 (Operation.seconds_to_hhmmss(preparing.prepare_end_time), preparing.cust_id) + endc)
                         # waiting time for each customer
                         waitingtimes.append(currentSecond-preparing.arrival_time)
                         preparing.finish_ic_order = False
 
                 if timelog and currentSecond == Ice_creamShop.total_sec - 900:
-                    print("%s: Shop is closing in 15 minutes, no new orders accepted." % Operation.seconds_to_hhmmss(currentSecond))
+                    print(red_bold + "%s: Shop is closing in 15 minutes, no new orders accepted." % Operation.seconds_to_hhmmss(currentSecond) + endc)
                     print("Finishing the remaining orders...")
 
                 if (currentSecond >= Ice_creamShop.total_sec and order_q.isEmpty() and prep_q.isEmpty()) or \
                     (icshop.is_enough_raw_material is False and finish_status is True and order_q.isEmpty() and prep_q.isEmpty()):
                     if timelog:
-                        print("%s: All orders completed. \n==========================================================================="
-                              "\nThere are %s customers coming in today. Average waiting time: %s minutes.\
+                        print("%s: All orders completed. \n===========================================================================" % Operation.seconds_to_hhmmss(currentSecond))
+                        print(black_bold + "There are %s customers coming in today. Average waiting time: %s minutes.\
                         \nTotal revenue is: $%s dollars. Today's profit is: $%s"
-                        % (Operation.seconds_to_hhmmss(currentSecond), len(waitingtimes), round((sum(waitingtimes)/len(waitingtimes))/60),
-                        "{:,}".format(revenue), "{:,}".format(revenue - icshop.total_variable_cost())))
+                        % (len(waitingtimes), round((sum(waitingtimes)/len(waitingtimes))/60),
+                        "{:,}".format(revenue), "{:,}".format(revenue - icshop.total_variable_cost())) + endc)
                         print("Ice-cream Shop closes for the day. See you again!")
                     break
 
@@ -296,7 +303,7 @@ def simulation(exp_chef_num, new_chef_num, exp_cashier_num, new_cashier_num, bud
                 outfile.close()
         else:
             if timelog:
-                print("Budget is not enough. Please adjust employee numbers or raw material cost.")
+                print(red_bold + "Budget is not enough. Please adjust employee numbers or raw material cost." + endc)
 
 
 if __name__ == '__main__':
